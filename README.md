@@ -35,39 +35,39 @@ aws ecs run-task --cluster MyWorkingCluster --task-definition prometheus-grafana
 
 5. After logginig in, add datasource:
 
-<img src="https://miro.medium.com/max/2732/0*I8R5h2bM0DpgaoVs" title="Adding the Datasource" alt="Adding the Datasource" />
+   <img src="https://miro.medium.com/max/2732/0*I8R5h2bM0DpgaoVs" title="Adding the Datasource" alt="Adding the Datasource" />
 
-* Fig 1: Monitoring results for Uptime, Containers, Load(Numerical Representation), DiskSpace, Memory, Filesystem Usage, CPU Usage, Memory Usage, Targets Online, Total Memory Usage, Alerts
+   * Fig 1: Monitoring results for Uptime, Containers, Load(Numerical Representation), DiskSpace, Memory, Filesystem Usage, CPU Usage, Memory Usage, Targets Online, Total Memory Usage, Alerts
 
 
 6. Import or Create a custom Grafana-Dashboard to monitor Docker containers running on the host:
 
-![Fig 2](https://miro.medium.com/max/2732/0*W0yXIT_P-1Gc_sY4)
+   ![Fig 2](https://miro.medium.com/max/2732/0*W0yXIT_P-1Gc_sY4)
 
-* Fig 2: Monitoring results for Uptime, Containers, Load(Numerical Representation), DiskSpace, Memory, Filesystem Usage, CPU Usage, Memory Usage, Targets Online, Total Memory Usage, Alerts.
+   * Fig 2: Monitoring results for Uptime, Containers, Load(Numerical Representation), DiskSpace, Memory, Filesystem Usage, CPU Usage, Memory Usage, Targets Online, Total Memory Usage, Alerts.
 
-![Fig 3](https://miro.medium.com/max/2732/0*EO1JyVMHPkbFEYdk)
+   ![Fig 3](https://miro.medium.com/max/2732/0*EO1JyVMHPkbFEYdk)
 
-* Fig 3: Monitoring results for CPU Usage, Network Traffic, Load, Available Memory, Node Network Traffic, Disk I/O, Node Memory, Filesystem Available, Container Network Input, Container Network Output.
+   * Fig 3: Monitoring results for CPU Usage, Network Traffic, Load, Available Memory, Node Network Traffic, Disk I/O, Node Memory, Filesystem Available, Container Network Input, Container Network Output.
 
-![Fig 4](https://miro.medium.com/max/2732/0*HeRmOCOHeHeJkkBB)
+   ![Fig 4](https://miro.medium.com/max/2732/0*HeRmOCOHeHeJkkBB)
 
-* Fig 4: Monitoring results for System Load on Node and Cached Memory per Container(Stacked).
+   * Fig 4: Monitoring results for System Load on Node and Cached Memory per Container(Stacked).
 
-![Fig 5](https://miro.medium.com/max/2732/0*Gmqz4PFyP5LjfRNn)
+   ![Fig 5](https://miro.medium.com/max/2732/0*Gmqz4PFyP5LjfRNn)
 
-* Fig 5: Monitoring Results for CPU Usage per container, Sent Traffic per Container, Received Network Traffic per Container, Memory Usage per Container.
+   * Fig 5: Monitoring Results for CPU Usage per container, Sent Traffic per Container, Received Network Traffic per Container, Memory Usage per Container.
 
-![Fig 6](https://miro.medium.com/max/2724/0*WjYd0f9n53689GUl)
+   ![Fig 6](https://miro.medium.com/max/2724/0*WjYd0f9n53689GUl)
 
-* Fig 6: Monitoring results for Network Rx, Network Tx, Tables for Usage Memory, Remaining Memory, Limit Memory.
+   * Fig 6: Monitoring results for Network Rx, Network Tx, Tables for Usage Memory, Remaining Memory, Limit Memory.
 
-![Fig 7](https://miro.medium.com/max/2728/0*3jj0V42Ph67rZwFN)
+   ![Fig 7](https://miro.medium.com/max/2728/0*3jj0V42Ph67rZwFN)
 
-* Fig 7: Monitoring results for Running versions and Metrics.
+   * Fig 7: Monitoring results for Running versions and Metrics.
 
 
 7. Useful Grafana Dashboards:
-  - Docker Host Monitoring: 11074, 10619, 395
-  - Docker Monitoring: 193
-  - Docker monitoring with Node selection: 8321
+   - Docker Host Monitoring: 11074, 10619, 395
+   - Docker Monitoring: 193
+   - Docker monitoring with Node selection: 8321
