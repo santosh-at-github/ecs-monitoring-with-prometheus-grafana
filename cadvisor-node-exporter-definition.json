@@ -1,0 +1,107 @@
+{
+    "family": "cadvisor-node-exporter-definition",
+    "taskRoleArn": "arn:aws:iam::342241566140:role/AmazonECSTaskRole",
+        "containerDefinitions": [
+            {
+                "name": "node-exporter",
+                "image": "prom/node-exporter",
+                "cpu": 512,
+                "memory": 256,
+                "memoryReservation": 128,
+                "portMappings": [
+                    {
+                        "containerPort": 9100,
+                        "hostPort": 9100,
+                        "protocol": "tcp"
+                    }
+                ],
+                "essential": true
+            },
+            {
+                "name": "cadvisor-exporter",
+                "image": "google/cadvisor",
+                "cpu": 512,
+                "memory": 256,
+                "memoryReservation": 128,
+                "portMappings": [
+                    {
+                        "containerPort": 8080,
+                        "hostPort": 9200,
+                        "protocol": "tcp"
+                    }
+                ],
+                "essential": true,
+                "mountPoints": [
+                    {
+                        "sourceVolume": "root",
+                        "containerPath": "/rootfs",
+                        "readOnly": true
+                    },
+                    {
+                        "sourceVolume": "cgroup",
+                        "containerPath": "/cgroup",
+                        "readOnly": true
+                    },
+                    {
+                        "sourceVolume": "var_run",
+                        "containerPath": "/var/run",
+                        "readOnly": true
+                    },
+                    {
+                        "sourceVolume": "var_lib_docker",
+                        "containerPath": "/var/lib/docker",
+                        "readOnly": true
+                    },
+                    {
+                        "sourceVolume": "dev_disk",
+                        "containerPath": "/dev/disk",
+                        "readOnly": true
+                    },
+                    {
+                        "sourceVolume": "cgroup",
+                        "containerPath": "/sys/fs/cgroup",
+                        "readOnly": true
+                    }
+                ],
+                "privileged": true,
+                "readonlyRootFilesystem": false
+            }
+        ],
+        "volumes": [
+            {
+                "name": "root",
+                "host": {
+                    "sourcePath": "/"
+                }
+            },
+            {
+                "name": "cgroup",
+                "host": {
+                    "sourcePath": "/cgroup"
+                }
+            },
+            {
+                "name": "var_run",
+                "host": {
+                    "sourcePath": "/var/run"
+                }
+            },
+            {
+                "name": "var_lib_docker",
+                "host": {
+                    "sourcePath": "/var/lib/docker"
+                }
+            },
+            {
+                "name": "dev_disk",
+                "host": {
+                    "sourcePath": "/dev/disk"
+                }
+            }
+        ],
+    "requiresCompatibilities": [
+        "EC2"
+    ],
+    "cpu": "1024",
+    "memory": "512"
+}

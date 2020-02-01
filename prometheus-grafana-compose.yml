@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+  prometheus:
+    image: prom/prometheus:v2.4.0
+    volumes:
+      - prometheus_config:/etc/prometheus/
+    ports:
+      - "9090:9090"
+    restart: always
+    depends_on:
+      - init-container
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: '100M'
+        reservations:
+          cpus: '0.1'
+          memory: '50M'
+  init-container:
+    image: alpine:latest
+    volumes:
+      - prometheus_config:/mnt/
+    command: wget https://raw.githubusercontent.com/santosh07bec/ecs-monitoring-with-prometheus-grafana/master/prometheus.yml -P /mnt/
+  grafana:
+    image: grafana/grafana
+    ports:
+      - "3000:3000"
+    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: '100M'
+        reservations:
+          cpus: '0.1'
+          memory: '50M'
+volumes:
+  prometheus_config:

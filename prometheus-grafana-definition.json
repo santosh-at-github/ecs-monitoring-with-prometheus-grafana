@@ -1,0 +1,83 @@
+{
+    "family": "prometheus-grafana-definition",
+    "taskRoleArn": "arn:aws:iam::342241566140:role/AmazonECSTaskRole",
+        "containerDefinitions": [
+            {
+                "name": "init-container",
+                "image": "alpine:latest",
+                "cpu": 0,
+                "memory": 256,
+                "memoryReservation": 128,
+                "essential": false,
+                "command": [
+                    "wget",
+                    "https://raw.githubusercontent.com/santosh07bec/ecs-monitoring-with-prometheus-grafana/master/prometheus.yml",
+                    "-P",
+                    "/mnt"
+                ],
+                "mountPoints": [
+                    {
+                        "sourceVolume": "prometheus_config",
+                        "containerPath": "/mnt"
+                    }
+                ]
+            },
+            {
+                "name": "prometheus",
+                "image": "prom/prometheus:v2.4.0",
+                "cpu": 512,
+                "memory": 512,
+                "memoryReservation": 256,
+                "portMappings": [
+                    {
+                        "containerPort": 9090,
+                        "hostPort": 9090,
+                        "protocol": "tcp"
+                    }
+                ],
+                "essential": true,
+                "mountPoints": [
+                    {
+                        "sourceVolume": "prometheus_config",
+                        "containerPath": "/etc/prometheus"
+                    }
+                ],
+                "dependsOn": [
+                    {
+                        "containerName": "init-container",
+                        "condition": "COMPLETE"
+                    }
+                ]
+            },
+            {
+                "name": "grafana",
+                "image": "grafana/grafana",
+                "cpu": 512,
+                "memory": 512,
+                "memoryReservation": 128,
+                "portMappings": [
+                    {
+                        "containerPort": 3000,
+                        "hostPort": 3000,
+                        "protocol": "tcp"
+                    }
+                ],
+                "essential": true
+            }
+        ],
+        "volumes": [
+            {
+                "name": "prometheus_config",
+                "dockerVolumeConfiguration": {
+                    "scope": "task",
+                    "driver": "local"
+                }
+            }
+        ],
+
+    "requiresCompatibilities": [
+        "EC2"
+    ],
+    "cpu": "1024",
+    "memory": "512"
+}
