@@ -6,7 +6,7 @@ Setup ECS monitoring using Prometheus and Grafana
 1. Modify 'init-container' definition (in prometheus-grafana-compose.yml/prometheus-grafana-definition.json) to download the correct 'prometheus.yml' configuration file.
 2. Modify 'prometheus.yml' to make sure it queries and filters correct set of EC2 instance which needs to be monitored.
    Here I used filter (in ec2_sd_configs section) with tag 'aws:autoscaling:groupName' and vlaue 'ECS_ASG-2' as all instances in my ECS clsuter was tagged with it.
-3. Use EC2 instance profile for ECS Cluster instance with permission to make describe calls for EC2 instances. This will be used by Prometheus to discover instance in your ECS cluster and add it in Prometheus targets (http://monitor_ec2_public_ip:9090/targets).
+3. Use EC2 instance profile for ECS Cluster instances with permission to make describe calls for EC2 instances. This will be used by Prometheus to discover instance in your ECS cluster and add it in Prometheus targets  (http://monitor_ec2_public_ip:9090/targets).
 4. Make sure instances in cluster can reach each other on ports 9090, 9100, and 9200 and open Grafana port 3000 for the IP range from where you need to access the Grafana Dashboard.
 
 ## Usages Instructions:
@@ -24,14 +24,14 @@ aws ecs register-task-definition --cli-input-json file://./prometheus-grafana-de
 aws ecs create-service --cluster MyWorkingCluster --service-name cadvisor-node-exporter --task-definition cadvisor-node-exporter-definition:1 --launch-type EC2 --scheduling-strategy DAEMON --region us-west-2
 ```
 
-3. Run one task for Prometheus and Grafana in the clsuter:
+3. Run one ECS Task for Prometheus and Grafana in the clsuter:
 
 ```
 aws ecs run-task --cluster MyWorkingCluster --task-definition prometheus-grafana-definition:3  --region us-west-2
 ```
 
 4. Access Grafana Dashboard using URL: http://monitor_ec2_public_ip:3000
-   Use user:admin and password:admin to login and then the password.
+   Use user:admin and password:admin to login and then reset the password.
 
 5. After logginig in, add datasource:
 
