@@ -1,5 +1,5 @@
 # ECS monitoring using Prometheus and Grafana
-Setup ECS monitoring using Prometheus and Grafana
+Setup ECS monitoring using Prometheus, Grafana, cAdvisor and Node Exporter
 
 ## Requirements:
 
