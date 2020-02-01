@@ -3,7 +3,7 @@ Setup ECS monitoring using Prometheus and Grafana
 
 ## Requirements:
 
-1. Modify 'init-container' definition to download the correct 'prometheus.yml' configuration file.
+1. Modify 'init-container' definition (in prometheus-grafana-compose.yml/prometheus-grafana-definition.json) to download the correct 'prometheus.yml' configuration file.
 2. Modify 'prometheus.yml' to make sure it queries and filters correct set of EC2 instance which needs to be monitored
    In this case I used filter (in ec2_sd_configs section) with tag 'aws:autoscaling:groupName' and vlaue 'ECS_ASG-2' as all instances in my ECS clsuter was tagged with it.
 3. Use EC2 instance profile for ECS Cluster instance with permission to make describe calls for EC2 instances. This will be used by Prometheus to discover instance in your ECS cluster and add it in Prometheus targets (http://monitor_ec2_public_ip:9090/targets).
