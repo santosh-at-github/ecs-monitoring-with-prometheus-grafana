@@ -13,7 +13,7 @@ scrape_configs:
         filters:
         - name: tag:aws:autoscaling:groupName
           values:
-          - ECS_ASG-2
+          - ECS
   - job_name: ecs_CAdvisor
     ec2_sd_configs:
       - port: 9200 # referred to cAdvisor exposed port
@@ -21,5 +21,5 @@ scrape_configs:
         filters:
         - name: tag:aws:autoscaling:groupName
           values:
-          - ECS_ASG-2
+          - ECS
 
